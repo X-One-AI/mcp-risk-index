@@ -19,12 +19,17 @@ jobs:
           test -f README.zh-CN.md
           test -f AGENTS.md
           test -f docs/product-foundation.md
+          test -f docs/superpowers/specs/2026-06-13-catalog-design.md
           test -f ops/opt-overlay.md
           test -f ops/constraints/production.md
           test -f ops/constraints/main-entry.md
           test -f ops/skills/evolution.md
           grep -q "README.zh-CN.md" README.md
           grep -q "README.md" README.zh-CN.md
+          grep -q "catalog design ready" README.md
+          grep -q "Catalog Design" README.zh-CN.md
+          grep -q "mcp-risk-index.catalog.v1" docs/superpowers/specs/2026-06-13-catalog-design.md
+          grep -q "unsupported claims" docs/superpowers/specs/2026-06-13-catalog-design.md
           grep -q "Do not modify OPT" ops/opt-overlay.md
           grep -q "Work on feature branches only" ops/opt-overlay.md
           grep -q "not a demo" ops/constraints/production.md

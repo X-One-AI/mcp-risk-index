@@ -6,7 +6,7 @@ An open risk index for common MCP servers, permissions, commands, and maintenanc
 
 ## Status
 
-`P2` - reserved data product foundation.
+`P2` - catalog design ready for v0.1.0 planning.
 
 ## Purpose
 
@@ -15,6 +15,8 @@ Convert mcp-audit rule experience into a reusable public data asset without unsu
 ## First Production Surface
 
 Versioned data catalog with evidence-backed entries and review workflow.
+
+The first executable surface is specified in [Catalog Design](./docs/superpowers/specs/2026-06-13-catalog-design.md).
 
 ## Required Evidence
 
@@ -29,6 +31,7 @@ Versioned data catalog with evidence-backed entries and review workflow.
 - no subjective ranking without evidence
 - no broad repo health clone
 - no security claims without criteria
+- no absolute safe/unsafe labels
 
 ## OPT Operating Model
 
@@ -41,6 +44,7 @@ Inputs that require user or real-world data are recorded in `../x-one-skipped-in
 ## Docs
 
 - [Product Foundation](./docs/product-foundation.md)
+- [Catalog Design](./docs/superpowers/specs/2026-06-13-catalog-design.md)
 - [OPT Overlay](./ops/opt-overlay.md)
 - [Production Constraints](./ops/constraints/production.md)
 - [Main Entry Constraints](./ops/constraints/main-entry.md)

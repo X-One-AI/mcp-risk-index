@@ -3,7 +3,7 @@
 ## Intake
 
 - Priority: P2
-- Status: reserved data product foundation
+- Status: catalog design ready for v0.1.0 planning
 - Positioning: An open risk index for common MCP servers, permissions, commands, and maintenance signals.
 - Primary route: Product -> Architecture -> Expert/Security -> QA -> Implementation -> Completion readiness
 
@@ -39,6 +39,8 @@ Convert mcp-audit rule experience into a reusable public data asset without unsu
 - The first production surface is local-first or review-first, not a hosted dashboard by default.
 - Reports, packets, indexes, or labs must be redaction-safe by design.
 - Every risky claim links to evidence, rule logic, or an explicit limitation.
+- The first catalog design is documented in `docs/superpowers/specs/2026-06-13-catalog-design.md`.
+- Review levels are prompts for human review, not safety scores.
 
 ## Architecture Brief
 
@@ -59,6 +61,7 @@ input evidence -> normalize -> redact -> evaluate -> render reviewable artifact
 - Overclaiming safety guarantees.
 - Creating generic tooling that weakens the Agentic DevSecOps signal.
 - Accepting real secrets or private user data into fixtures.
+- Publishing unsupported safe/unsafe claims as if they were verified security facts.
 
 ## QA Plan
 
@@ -69,11 +72,13 @@ input evidence -> normalize -> redact -> evaluate -> render reviewable artifact
 
 ## Implementation Plan
 
-1. Keep this foundation branch small and reviewable.
-2. Add the first executable surface only after the missing inputs are resolved or explicitly skipped.
-3. Use feature branches named `feat/<scope>` or `docs/<scope>`.
-4. Use Conventional/Angular commits such as `feat: add packet schema` or `docs: clarify deferred scope`.
-5. Never push directly to `main`; open a pull request from the feature branch.
+1. Keep the first executable surface local-first and deterministic.
+2. Use a versioned `mcp-risk-index.catalog.v1` data contract.
+3. Require evidence links for every risk signal.
+4. Render Markdown and JSON before adding hosted or automated scraping workflows.
+5. Use feature branches named `feat/<scope>` or `docs/<scope>`.
+6. Use Conventional/Angular commits such as `feat: add catalog schema` or `docs: clarify deferred scope`.
+7. Never push directly to `main`; open a pull request from the feature branch.
 
 ## Skipped Inputs
 
