@@ -6,7 +6,7 @@ An open risk index for common MCP servers, permissions, commands, and maintenanc
 
 ## Status
 
-`v0.1.0` - local catalog validation and rendering CLI.
+`v0.2.0` - local catalog validation, strict review checks, and rendering CLI.
 
 ## Purpose
 
@@ -19,7 +19,7 @@ Versioned data catalog with evidence-backed entries and a deterministic local CL
 ```bash
 python3 -m pip install xone-mcp-risk-index
 mcp-risk-index init --output mcp-risk-index.catalog.yml
-mcp-risk-index validate --catalog mcp-risk-index.catalog.yml
+mcp-risk-index validate --catalog mcp-risk-index.catalog.yml --strict
 mcp-risk-index render --catalog mcp-risk-index.catalog.yml --format markdown --output mcp-risk-index.md
 mcp-risk-index render --catalog mcp-risk-index.catalog.yml --format json --output mcp-risk-index.json
 ```
@@ -27,7 +27,7 @@ mcp-risk-index render --catalog mcp-risk-index.catalog.yml --format json --outpu
 From a source checkout, you can also validate the bundled catalog:
 
 ```bash
-mcp-risk-index validate --catalog data/catalog.yml
+mcp-risk-index validate --catalog data/catalog.yml --strict
 mcp-risk-index render --catalog data/catalog.yml --format markdown --output mcp-risk-index.md
 mcp-risk-index render --catalog data/catalog.yml --format json --output mcp-risk-index.json
 ```
@@ -50,6 +50,8 @@ Review levels are prompts for human inspection:
 - `high-review`: require explicit owner approval
 
 They are not safety scores.
+
+Strict validation requires production review governance fields such as `maintenance.source_checked_at` and a GitHub repository source.
 
 ## Required Evidence
 
@@ -77,6 +79,7 @@ Inputs that require user or real-world data are recorded in `../x-one-skipped-in
 ## Docs
 
 - [Product Foundation](./docs/product-foundation.md)
+- [Catalog Governance](./docs/catalog-governance.md)
 - [Catalog Design](./docs/superpowers/specs/2026-06-13-catalog-design.md)
 - [OPT Overlay](./ops/opt-overlay.md)
 - [Production Constraints](./ops/constraints/production.md)

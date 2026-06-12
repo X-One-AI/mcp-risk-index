@@ -15,7 +15,7 @@ from .schema import (
 )
 
 
-def load_catalog(path: Path | str) -> dict[str, Any]:
+def load_catalog(path: Path | str, *, strict: bool = False) -> dict[str, Any]:
     catalog_path = Path(path)
     try:
         raw = yaml.safe_load(catalog_path.read_text(encoding="utf-8"))
@@ -27,11 +27,11 @@ def load_catalog(path: Path | str) -> dict[str, Any]:
     if not isinstance(raw, dict):
         raise CatalogValidationError("Catalog root must be a mapping")
 
-    validate_catalog(raw)
+    validate_catalog(raw, strict=strict)
     return raw
 
 
-def validate_catalog(catalog: dict[str, Any]) -> None:
+def validate_catalog(catalog: dict[str, Any], *, strict: bool = False) -> None:
     if catalog.get("schema_version") != SCHEMA_VERSION:
         raise CatalogValidationError(f"Unsupported schema_version: {catalog.get('schema_version')!r}")
 
@@ -41,10 +41,10 @@ def validate_catalog(catalog: dict[str, Any]) -> None:
 
     seen_ids: set[str] = set()
     for index, entry in enumerate(entries):
-        _validate_entry(entry, index=index, seen_ids=seen_ids)
+        _validate_entry(entry, index=index, seen_ids=seen_ids, strict=strict)
 
 
-def _validate_entry(entry: Any, *, index: int, seen_ids: set[str]) -> None:
+def _validate_entry(entry: Any, *, index: int, seen_ids: set[str], strict: bool) -> None:
     if not isinstance(entry, dict):
         raise CatalogValidationError(f"Entry at index {index} must be a mapping")
 
@@ -75,6 +75,8 @@ def _validate_entry(entry: Any, *, index: int, seen_ids: set[str]) -> None:
         raise CatalogValidationError(f"Entry {entry_id} permissions must be a mapping")
     if not isinstance(entry["maintenance"], dict):
         raise CatalogValidationError(f"Entry {entry_id} maintenance must be a mapping")
+    if strict:
+        _validate_strict_entry(entry, entry_id=entry_id)
 
     signals = entry["risk_signals"]
     if not isinstance(signals, list) or not signals:
@@ -102,3 +104,14 @@ def _validate_signal(signal: Any, *, entry_id: str, signal_index: int) -> None:
     evidence = signal.get("evidence")
     if not isinstance(evidence, list) or not evidence or not all(isinstance(item, str) and item for item in evidence):
         raise CatalogValidationError(f"Risk signal {signal_id} on entry {entry_id} must include evidence")
+
+
+def _validate_strict_entry(entry: dict[str, Any], *, entry_id: str) -> None:
+    maintenance = entry["maintenance"]
+    source_checked_at = maintenance.get("source_checked_at")
+    if not isinstance(source_checked_at, str) or len(source_checked_at.split("-")) != 3:
+        raise CatalogValidationError(f"Entry {entry_id} must include maintenance.source_checked_at in strict mode")
+    if not isinstance(maintenance.get("repository"), str) or not maintenance["repository"].startswith("https://github.com/"):
+        raise CatalogValidationError(f"Entry {entry_id} must include a GitHub repository URL in strict mode")
+    if not isinstance(entry["homepage"], str) or not entry["homepage"].startswith("https://"):
+        raise CatalogValidationError(f"Entry {entry_id} homepage must be an https URL in strict mode")

@@ -6,7 +6,7 @@
 
 ## 状态
 
-`v0.1.0` - 本地 catalog 校验和渲染 CLI。
+`v0.2.0` - 本地 catalog 校验、strict review 检查和渲染 CLI。
 
 ## 目的
 
@@ -19,7 +19,7 @@
 ```bash
 python3 -m pip install xone-mcp-risk-index
 mcp-risk-index init --output mcp-risk-index.catalog.yml
-mcp-risk-index validate --catalog mcp-risk-index.catalog.yml
+mcp-risk-index validate --catalog mcp-risk-index.catalog.yml --strict
 mcp-risk-index render --catalog mcp-risk-index.catalog.yml --format markdown --output mcp-risk-index.md
 mcp-risk-index render --catalog mcp-risk-index.catalog.yml --format json --output mcp-risk-index.json
 ```
@@ -27,7 +27,7 @@ mcp-risk-index render --catalog mcp-risk-index.catalog.yml --format json --outpu
 如果在源码仓库中，也可以直接校验内置 catalog：
 
 ```bash
-mcp-risk-index validate --catalog data/catalog.yml
+mcp-risk-index validate --catalog data/catalog.yml --strict
 mcp-risk-index render --catalog data/catalog.yml --format markdown --output mcp-risk-index.md
 mcp-risk-index render --catalog data/catalog.yml --format json --output mcp-risk-index.json
 ```
@@ -50,6 +50,8 @@ Review level 是给人工检查的提示：
 - `high-review`：需要明确 owner 审批
 
 它们不是安全评分。
+
+Strict validation 会要求生产 review 治理字段，例如 `maintenance.source_checked_at` 和 GitHub repository 来源。
 
 ## 必要证据
 
@@ -77,6 +79,7 @@ Review level 是给人工检查的提示：
 ## 文档
 
 - [产品基础](./docs/product-foundation.md)
+- [Catalog Governance](./docs/catalog-governance.md)
 - [Catalog Design](./docs/superpowers/specs/2026-06-13-catalog-design.md)
 - [OPT Overlay](./ops/opt-overlay.md)
 - [生产约束](./ops/constraints/production.md)

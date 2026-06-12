@@ -2,7 +2,7 @@ schema_version: mcp-risk-index.catalog.v1
 entries:
   - id: filesystem-server
     name: Filesystem MCP Server
-    homepage: https://github.com/modelcontextprotocol/servers
+    homepage: https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem
     package:
       manager: npx
       name: "@modelcontextprotocol/server-filesystem"
@@ -17,22 +17,23 @@ entries:
       process: []
     maintenance:
       repository: https://github.com/modelcontextprotocol/servers
-      release_signal: "example entry; verify current release before adoption"
+      source_checked_at: "2026-06-13"
+      release_signal: "monorepo pushed 2026-06-07 per GitHub repository metadata"
     risk_signals:
       - id: filesystem-access
         level: review
         evidence:
-          - https://github.com/modelcontextprotocol/servers
+          - https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem
       - id: unpinned-launch
         level: review
         evidence:
           - "launch.command uses npx without a pinned package version"
     limitations:
-      - "Example entry for schema validation; verify current repository state before production adoption."
+      - "Catalog records command and permission signals only; verify current package release and allowed paths before production adoption."
 
   - id: fetch-server
     name: Fetch MCP Server
-    homepage: https://github.com/modelcontextprotocol/servers
+    homepage: https://github.com/modelcontextprotocol/servers/tree/main/src/fetch
     package:
       manager: uvx
       name: mcp-server-fetch
@@ -42,20 +43,165 @@ entries:
     permissions:
       filesystem: []
       network:
-        - "arbitrary outbound HTTP(S) requested by prompts"
+        - "outbound HTTP(S) requested by prompts or tool calls"
       environment: []
       process: []
     maintenance:
       repository: https://github.com/modelcontextprotocol/servers
-      release_signal: "example entry; verify current release before adoption"
+      source_checked_at: "2026-06-13"
+      release_signal: "monorepo pushed 2026-06-07 per GitHub repository metadata"
     risk_signals:
       - id: network-access
         level: review
         evidence:
-          - https://github.com/modelcontextprotocol/servers
+          - https://github.com/modelcontextprotocol/servers/tree/main/src/fetch
       - id: unpinned-launch
         level: review
         evidence:
           - "launch.command uses uvx without a pinned package version"
     limitations:
-      - "Network behavior depends on user prompts and runtime configuration."
+      - "Network destinations depend on user prompts, client policy, and runtime configuration."
+
+  - id: git-server
+    name: Git MCP Server
+    homepage: https://github.com/modelcontextprotocol/servers/tree/main/src/git
+    package:
+      manager: uvx
+      name: mcp-server-git
+    launch:
+      command: "uvx mcp-server-git"
+      version_pinned: false
+    permissions:
+      filesystem:
+        - "local git repositories selected by configuration or tool input"
+      network: []
+      environment: []
+      process:
+        - "git command execution against local repositories"
+    maintenance:
+      repository: https://github.com/modelcontextprotocol/servers
+      source_checked_at: "2026-06-13"
+      release_signal: "monorepo pushed 2026-06-07 per GitHub repository metadata"
+    risk_signals:
+      - id: filesystem-access
+        level: review
+        evidence:
+          - https://github.com/modelcontextprotocol/servers/tree/main/src/git
+      - id: process-exec
+        level: review
+        evidence:
+          - https://github.com/modelcontextprotocol/servers/tree/main/src/git
+      - id: unpinned-launch
+        level: review
+        evidence:
+          - "launch.command uses uvx without a pinned package version"
+    limitations:
+      - "Actual repository scope depends on MCP client configuration and working directory."
+
+  - id: memory-server
+    name: Memory MCP Server
+    homepage: https://github.com/modelcontextprotocol/servers/tree/main/src/memory
+    package:
+      manager: npx
+      name: "@modelcontextprotocol/server-memory"
+    launch:
+      command: "npx -y @modelcontextprotocol/server-memory"
+      version_pinned: false
+    permissions:
+      filesystem:
+        - "persistent local knowledge graph storage"
+      network: []
+      environment: []
+      process: []
+    maintenance:
+      repository: https://github.com/modelcontextprotocol/servers
+      source_checked_at: "2026-06-13"
+      release_signal: "monorepo pushed 2026-06-07 per GitHub repository metadata"
+    risk_signals:
+      - id: filesystem-access
+        level: review
+        evidence:
+          - https://github.com/modelcontextprotocol/servers/tree/main/src/memory
+      - id: unpinned-launch
+        level: review
+        evidence:
+          - "launch.command uses npx without a pinned package version"
+    limitations:
+      - "Stored memory content can be sensitive; catalog does not inspect or classify user memory data."
+
+  - id: github-mcp-server
+    name: GitHub MCP Server
+    homepage: https://github.com/github/github-mcp-server
+    package:
+      manager: docker
+      name: ghcr.io/github/github-mcp-server
+    launch:
+      command: "docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN ghcr.io/github/github-mcp-server"
+      version_pinned: false
+    permissions:
+      filesystem: []
+      network:
+        - "GitHub API access based on token scopes"
+      environment:
+        - "GITHUB_PERSONAL_ACCESS_TOKEN or equivalent credential"
+      process:
+        - "Docker container launch"
+    maintenance:
+      repository: https://github.com/github/github-mcp-server
+      source_checked_at: "2026-06-13"
+      release_signal: "repository pushed 2026-06-12 per GitHub repository metadata"
+    risk_signals:
+      - id: network-access
+        level: high-review
+        evidence:
+          - https://github.com/github/github-mcp-server
+      - id: env-access
+        level: high-review
+        evidence:
+          - "launch.command passes GITHUB_PERSONAL_ACCESS_TOKEN into the server environment"
+      - id: process-exec
+        level: review
+        evidence:
+          - "launch.command starts a Docker container"
+      - id: unpinned-launch
+        level: review
+        evidence:
+          - "launch.command does not pin an image digest or tag"
+    limitations:
+      - "Risk depends heavily on GitHub token scopes and organization policy."
+
+  - id: chrome-devtools-mcp
+    name: Chrome DevTools MCP
+    homepage: https://github.com/ChromeDevTools/chrome-devtools-mcp
+    package:
+      manager: npx
+      name: chrome-devtools-mcp
+    launch:
+      command: "npx chrome-devtools-mcp@latest"
+      version_pinned: false
+    permissions:
+      filesystem: []
+      network:
+        - "browser and page inspection may expose active web application state"
+      environment: []
+      process:
+        - "local Chrome/DevTools integration"
+    maintenance:
+      repository: https://github.com/ChromeDevTools/chrome-devtools-mcp
+      source_checked_at: "2026-06-13"
+      release_signal: "repository pushed 2026-06-12 per GitHub repository metadata"
+    risk_signals:
+      - id: sensitive-domain-access
+        level: high-review
+        evidence:
+          - https://github.com/ChromeDevTools/chrome-devtools-mcp
+      - id: process-exec
+        level: review
+        evidence:
+          - "launch.command starts local Chrome DevTools integration"
+      - id: unpinned-launch
+        level: review
+        evidence:
+          - "launch.command uses @latest rather than an exact package version"
+    limitations:
+      - "Sensitive-domain exposure depends on which browser profile, tabs, and targets the client allows."
