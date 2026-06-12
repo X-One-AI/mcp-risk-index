@@ -1,0 +1,31 @@
+schema_version: mcp-risk-index.catalog.v1
+entries:
+  - id: example-filesystem-server
+    name: Example Filesystem Server
+    homepage: https://example.test/mcp-server
+    package:
+      manager: npx
+      name: example-mcp-server
+    launch:
+      command: "npx example-mcp-server /workspace"
+      version_pinned: false
+    permissions:
+      filesystem:
+        - "/workspace"
+      network: []
+      environment: []
+      process: []
+    maintenance:
+      repository: https://example.test/mcp-server
+      release_signal: "replace with current release or activity evidence before use"
+    risk_signals:
+      - id: filesystem-access
+        level: review
+        evidence:
+          - "replace with a source URL or review note"
+      - id: unpinned-launch
+        level: review
+        evidence:
+          - "launch.command uses npx without a pinned package version"
+    limitations:
+      - "Starter entry only; replace all example values before using this catalog for review."

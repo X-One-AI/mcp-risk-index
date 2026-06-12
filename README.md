@@ -6,17 +6,50 @@ An open risk index for common MCP servers, permissions, commands, and maintenanc
 
 ## Status
 
-`P2` - catalog design ready for v0.1.0 planning.
+`v0.1.0` - local catalog validation and rendering CLI.
 
 ## Purpose
 
-Convert mcp-audit rule experience into a reusable public data asset without unsupported claims.
+Convert `mcp-audit` rule experience into a reusable public data asset without unsupported claims.
 
 ## First Production Surface
 
-Versioned data catalog with evidence-backed entries and review workflow.
+Versioned data catalog with evidence-backed entries and a deterministic local CLI.
 
-The first executable surface is specified in [Catalog Design](./docs/superpowers/specs/2026-06-13-catalog-design.md).
+```bash
+python3 -m pip install xone-mcp-risk-index
+mcp-risk-index init --output mcp-risk-index.catalog.yml
+mcp-risk-index validate --catalog mcp-risk-index.catalog.yml
+mcp-risk-index render --catalog mcp-risk-index.catalog.yml --format markdown --output mcp-risk-index.md
+mcp-risk-index render --catalog mcp-risk-index.catalog.yml --format json --output mcp-risk-index.json
+```
+
+From a source checkout, you can also validate the bundled catalog:
+
+```bash
+mcp-risk-index validate --catalog data/catalog.yml
+mcp-risk-index render --catalog data/catalog.yml --format markdown --output mcp-risk-index.md
+mcp-risk-index render --catalog data/catalog.yml --format json --output mcp-risk-index.json
+```
+
+For local development:
+
+```bash
+python3 -m pip install -e '.[dev]'
+python3 -m pytest tests -q
+```
+
+## Catalog Contract
+
+The bundled catalog uses `mcp-risk-index.catalog.v1`. Each entry records identity, package, launch command, permissions, maintenance facts, review-level risk signals, evidence, and limitations.
+
+Review levels are prompts for human inspection:
+
+- `info`: useful context
+- `review`: inspect before adoption
+- `high-review`: require explicit owner approval
+
+They are not safety scores.
 
 ## Required Evidence
 

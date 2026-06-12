@@ -12,6 +12,11 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6.0.3
 
+      - name: Set up Python
+        uses: actions/setup-python@v6.0.0
+        with:
+          python-version: "3.12"
+
       - name: Verify project foundation
         run: |
           set -euo pipefail
@@ -26,11 +31,29 @@ jobs:
           test -f ops/skills/evolution.md
           grep -q "README.zh-CN.md" README.md
           grep -q "README.md" README.zh-CN.md
-          grep -q "catalog design ready" README.md
-          grep -q "Catalog Design" README.zh-CN.md
+          grep -q "mcp-risk-index validate" README.md
+          grep -q "mcp-risk-index validate" README.zh-CN.md
           grep -q "mcp-risk-index.catalog.v1" docs/superpowers/specs/2026-06-13-catalog-design.md
           grep -q "unsupported claims" docs/superpowers/specs/2026-06-13-catalog-design.md
           grep -q "Do not modify OPT" ops/opt-overlay.md
           grep -q "Work on feature branches only" ops/opt-overlay.md
           grep -q "not a demo" ops/constraints/production.md
           grep -q "Delete Or Weaken" ops/skills/evolution.md
+
+      - name: Install package
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -e '.[dev]'
+
+      - name: Run tests
+        run: python3 -m pytest tests -q
+
+      - name: Run CLI smoke checks
+        run: |
+          set -euo pipefail
+          mcp-risk-index --version
+          mcp-risk-index init --output /tmp/mcp-risk-index.catalog.yml
+          mcp-risk-index validate --catalog /tmp/mcp-risk-index.catalog.yml
+          mcp-risk-index validate --catalog data/catalog.yml
+          mcp-risk-index render --catalog data/catalog.yml --format json --output /tmp/mcp-risk-index.json
+          grep -q "mcp-risk-index.catalog.v1" /tmp/mcp-risk-index.json

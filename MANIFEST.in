@@ -1,0 +1,9 @@
+include README.md
+include README.zh-CN.md
+include CHANGELOG.md
+include LICENSE
+recursive-include data *.yml
+recursive-include docs *.md
+recursive-include ops *.md
+recursive-include tests/fixtures *.yml
+recursive-include tests/fixtures *.md

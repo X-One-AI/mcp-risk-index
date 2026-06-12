@@ -1,0 +1,22 @@
+schema_version: mcp-risk-index.catalog.v1
+entries:
+  - id: unsafe-claim
+    name: Unsafe Claim
+    homepage: https://example.test
+    score: 10
+    safe: false
+    package:
+      manager: npx
+      name: unsafe-claim
+    launch:
+      command: "npx unsafe-claim"
+      version_pinned: false
+    permissions: {}
+    maintenance: {}
+    risk_signals:
+      - id: filesystem-access
+        level: review
+        evidence:
+          - https://example.test
+    limitations:
+      - "fixture"
