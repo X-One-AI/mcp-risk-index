@@ -25,8 +25,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 0
 
         if args.command == "validate":
-            catalog = load_catalog(args.catalog)
-            print(f"schema_version={catalog['schema_version']} entries={len(catalog['entries'])}")
+            catalog = load_catalog(args.catalog, strict=args.strict)
+            print(f"schema_version={catalog['schema_version']} entries={len(catalog['entries'])} strict={str(args.strict).lower()}")
             return 0
 
         if args.command == "render":
@@ -63,6 +63,7 @@ def _build_parser() -> argparse.ArgumentParser:
 
     validate = subparsers.add_parser("validate", help="Validate a catalog file.")
     validate.add_argument("--catalog", required=True, type=Path, help="Path to catalog YAML.")
+    validate.add_argument("--strict", action="store_true", help="Require governance fields for production review.")
 
     render = subparsers.add_parser("render", help="Render a catalog as Markdown or JSON.")
     render.add_argument("--catalog", required=True, type=Path, help="Path to catalog YAML.")

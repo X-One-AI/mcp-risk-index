@@ -17,7 +17,21 @@ def test_load_catalog_validates_bundled_catalog():
     catalog = load_catalog(CATALOG)
 
     assert catalog["schema_version"] == "mcp-risk-index.catalog.v1"
-    assert [entry["id"] for entry in catalog["entries"]] == ["filesystem-server", "fetch-server"]
+    assert [entry["id"] for entry in catalog["entries"]] == [
+        "filesystem-server",
+        "fetch-server",
+        "git-server",
+        "memory-server",
+        "github-mcp-server",
+        "chrome-devtools-mcp",
+    ]
+
+
+def test_strict_catalog_validation_requires_review_governance_fields():
+    catalog = load_catalog(CATALOG, strict=True)
+
+    assert len(catalog["entries"]) >= 6
+    assert all(entry["maintenance"]["source_checked_at"] == "2026-06-13" for entry in catalog["entries"])
 
 
 @pytest.mark.parametrize(
@@ -51,16 +65,16 @@ def test_cli_validate_and_render(tmp_path, capsys):
     json_output = tmp_path / "index.json"
     starter = tmp_path / "catalog.yml"
 
-    validate_exit = main(["validate", "--catalog", str(CATALOG)])
+    validate_exit = main(["validate", "--catalog", str(CATALOG), "--strict"])
     init_exit = main(["init", "--output", str(starter)])
     markdown_exit = main(["render", "--catalog", str(CATALOG), "--format", "markdown", "--output", str(markdown)])
     json_exit = main(["render", "--catalog", str(CATALOG), "--format", "json", "--output", str(json_output)])
 
     captured = capsys.readouterr()
     assert validate_exit == 0
-    assert "entries=2" in captured.out
+    assert "strict=true" in captured.out
     assert init_exit == 0
-    assert load_catalog(starter)["entries"]
+    assert load_catalog(starter, strict=True)["entries"]
     assert markdown_exit == 0
     assert json_exit == 0
     assert "# MCP Risk Index" in markdown.read_text(encoding="utf-8")
@@ -76,4 +90,4 @@ def test_package_module_entrypoint_outputs_version():
         stdout=subprocess.PIPE,
     )
 
-    assert result.stdout.strip() == "mcp-risk-index 0.1.0"
+    assert result.stdout.strip() == "mcp-risk-index 0.2.0"

@@ -53,7 +53,7 @@ jobs:
           set -euo pipefail
           mcp-risk-index --version
           mcp-risk-index init --output /tmp/mcp-risk-index.catalog.yml
-          mcp-risk-index validate --catalog /tmp/mcp-risk-index.catalog.yml
-          mcp-risk-index validate --catalog data/catalog.yml
+          mcp-risk-index validate --catalog /tmp/mcp-risk-index.catalog.yml --strict
+          mcp-risk-index validate --catalog data/catalog.yml --strict
           mcp-risk-index render --catalog data/catalog.yml --format json --output /tmp/mcp-risk-index.json
           grep -q "mcp-risk-index.catalog.v1" /tmp/mcp-risk-index.json

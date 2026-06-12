@@ -2,7 +2,7 @@ schema_version: mcp-risk-index.catalog.v1
 entries:
   - id: example-filesystem-server
     name: Example Filesystem Server
-    homepage: https://example.test/mcp-server
+    homepage: https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem
     package:
       manager: npx
       name: example-mcp-server
@@ -16,7 +16,8 @@ entries:
       environment: []
       process: []
     maintenance:
-      repository: https://example.test/mcp-server
+      repository: https://github.com/modelcontextprotocol/servers
+      source_checked_at: "2026-06-13"
       release_signal: "replace with current release or activity evidence before use"
     risk_signals:
       - id: filesystem-access

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0
+
+- Expand the bundled catalog to six evidence-backed real-world MCP server entries.
+- Add strict catalog validation for production review governance fields.
+- Add catalog governance and contribution guidance.
+- Improve install-to-first-catalog flow with `mcp-risk-index init`.
+
 ## 0.1.0
 
 - Add the first `mcp-risk-index.catalog.v1` catalog schema and bundled catalog.

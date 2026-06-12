@@ -3,7 +3,7 @@
 ## Intake
 
 - Priority: P2
-- Status: v0.1.0 local catalog CLI
+- Status: v0.2.0 strict catalog CLI and governance
 - Positioning: An open risk index for common MCP servers, permissions, commands, and maintenance signals.
 - Primary route: Product -> Architecture -> Expert/Security -> QA -> Implementation -> Completion readiness
 
@@ -42,8 +42,10 @@ Convert mcp-audit rule experience into a reusable public data asset without unsu
 - The first catalog design is documented in `docs/superpowers/specs/2026-06-13-catalog-design.md`.
 - Review levels are prompts for human review, not safety scores.
 - `mcp-risk-index validate --catalog data/catalog.yml` validates the bundled catalog.
+- `mcp-risk-index validate --catalog data/catalog.yml --strict` validates governance fields for production review.
 - `mcp-risk-index render` produces Markdown and JSON outputs.
 - Invalid unknown signals, missing evidence, and safe/unsafe labels fail validation.
+- The bundled catalog includes multiple real-world MCP server entries with evidence and limitations.
 
 ## Architecture Brief
 
