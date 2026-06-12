@@ -6,29 +6,32 @@
 
 ## 状态
 
-`P2` - reserved data product foundation。
+`P2` - catalog 设计已准备进入 v0.1.0 规划。
 
 ## 目的
 
-Convert mcp-audit rule experience into a reusable public data asset without unsupported claims.
+把 `mcp-audit` 的规则经验转成可复用的公共数据资产，同时避免没有证据支撑的安全断言。
 
 ## 第一生产化表面
 
-Versioned data catalog with evidence-backed entries and review workflow.
+版本化 data catalog：每个条目都需要证据支撑，并配套 review workflow。
+
+第一可执行表面已在 [Catalog Design](./docs/superpowers/specs/2026-06-13-catalog-design.md) 中定义。
 
 ## 必要证据
 
-- server identity
-- permission profile
-- command/package signals
-- maintenance signals
-- evidence links
+- server 身份
+- 权限画像
+- 命令/package 信号
+- 维护状态信号
+- 证据链接
 
 ## 非目标
 
-- no subjective ranking without evidence
-- no broad repo health clone
-- no security claims without criteria
+- 不做没有证据的主观排名
+- 不做泛 repo health clone
+- 不做没有标准支撑的安全声明
+- 不做绝对 safe/unsafe 标签
 
 ## OPT 运行模型
 
@@ -41,6 +44,7 @@ Versioned data catalog with evidence-backed entries and review workflow.
 ## 文档
 
 - [产品基础](./docs/product-foundation.md)
+- [Catalog Design](./docs/superpowers/specs/2026-06-13-catalog-design.md)
 - [OPT Overlay](./ops/opt-overlay.md)
 - [生产约束](./ops/constraints/production.md)
 - [主入口约束](./ops/constraints/main-entry.md)
