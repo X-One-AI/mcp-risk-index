@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xone-mcp-risk-index"
+version = "0.1.0"
+description = "Evidence-backed MCP server risk signal catalog and local CLI."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+  { name = "X-One-AI" }
+]
+keywords = ["mcp", "security", "ai", "catalog", "risk"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Information Technology",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Security",
+  "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = [
+  "PyYAML>=6.0.1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "build>=1.2.2",
+  "pytest>=8.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/X-One-AI/mcp-risk-index"
+Repository = "https://github.com/X-One-AI/mcp-risk-index"
+Issues = "https://github.com/X-One-AI/mcp-risk-index/issues"
+
+[project.scripts]
+mcp-risk-index = "mcp_risk_index.cli:entrypoint"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+mcp_risk_index = ["catalogs/*.yml"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

@@ -1,0 +1,20 @@
+schema_version: mcp-risk-index.catalog.v1
+entries:
+  - id: bad-server
+    name: Bad Server
+    homepage: https://example.test
+    package:
+      manager: npx
+      name: bad-server
+    launch:
+      command: "npx bad-server"
+      version_pinned: false
+    permissions: {}
+    maintenance: {}
+    risk_signals:
+      - id: made-up-risk
+        level: review
+        evidence:
+          - https://example.test
+    limitations:
+      - "fixture"

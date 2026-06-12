@@ -1,0 +1,61 @@
+schema_version: mcp-risk-index.catalog.v1
+entries:
+  - id: filesystem-server
+    name: Filesystem MCP Server
+    homepage: https://github.com/modelcontextprotocol/servers
+    package:
+      manager: npx
+      name: "@modelcontextprotocol/server-filesystem"
+    launch:
+      command: "npx -y @modelcontextprotocol/server-filesystem /workspace"
+      version_pinned: false
+    permissions:
+      filesystem:
+        - "/workspace"
+      network: []
+      environment: []
+      process: []
+    maintenance:
+      repository: https://github.com/modelcontextprotocol/servers
+      release_signal: "example entry; verify current release before adoption"
+    risk_signals:
+      - id: filesystem-access
+        level: review
+        evidence:
+          - https://github.com/modelcontextprotocol/servers
+      - id: unpinned-launch
+        level: review
+        evidence:
+          - "launch.command uses npx without a pinned package version"
+    limitations:
+      - "Example entry for schema validation; verify current repository state before production adoption."
+
+  - id: fetch-server
+    name: Fetch MCP Server
+    homepage: https://github.com/modelcontextprotocol/servers
+    package:
+      manager: uvx
+      name: mcp-server-fetch
+    launch:
+      command: "uvx mcp-server-fetch"
+      version_pinned: false
+    permissions:
+      filesystem: []
+      network:
+        - "arbitrary outbound HTTP(S) requested by prompts"
+      environment: []
+      process: []
+    maintenance:
+      repository: https://github.com/modelcontextprotocol/servers
+      release_signal: "example entry; verify current release before adoption"
+    risk_signals:
+      - id: network-access
+        level: review
+        evidence:
+          - https://github.com/modelcontextprotocol/servers
+      - id: unpinned-launch
+        level: review
+        evidence:
+          - "launch.command uses uvx without a pinned package version"
+    limitations:
+      - "Network behavior depends on user prompts and runtime configuration."

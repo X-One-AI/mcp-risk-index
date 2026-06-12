@@ -1,0 +1,19 @@
+schema_version: mcp-risk-index.catalog.v1
+entries:
+  - id: missing-evidence
+    name: Missing Evidence
+    homepage: https://example.test
+    package:
+      manager: npx
+      name: missing-evidence
+    launch:
+      command: "npx missing-evidence"
+      version_pinned: false
+    permissions: {}
+    maintenance: {}
+    risk_signals:
+      - id: filesystem-access
+        level: review
+        evidence: []
+    limitations:
+      - "fixture"

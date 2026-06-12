@@ -6,7 +6,7 @@
 
 ## 状态
 
-`P2` - catalog 设计已准备进入 v0.1.0 规划。
+`v0.1.0` - 本地 catalog 校验和渲染 CLI。
 
 ## 目的
 
@@ -14,9 +14,42 @@
 
 ## 第一生产化表面
 
-版本化 data catalog：每个条目都需要证据支撑，并配套 review workflow。
+版本化 data catalog：每个条目都需要证据支撑，并提供确定性的本地 CLI。
 
-第一可执行表面已在 [Catalog Design](./docs/superpowers/specs/2026-06-13-catalog-design.md) 中定义。
+```bash
+python3 -m pip install xone-mcp-risk-index
+mcp-risk-index init --output mcp-risk-index.catalog.yml
+mcp-risk-index validate --catalog mcp-risk-index.catalog.yml
+mcp-risk-index render --catalog mcp-risk-index.catalog.yml --format markdown --output mcp-risk-index.md
+mcp-risk-index render --catalog mcp-risk-index.catalog.yml --format json --output mcp-risk-index.json
+```
+
+如果在源码仓库中，也可以直接校验内置 catalog：
+
+```bash
+mcp-risk-index validate --catalog data/catalog.yml
+mcp-risk-index render --catalog data/catalog.yml --format markdown --output mcp-risk-index.md
+mcp-risk-index render --catalog data/catalog.yml --format json --output mcp-risk-index.json
+```
+
+本地开发：
+
+```bash
+python3 -m pip install -e '.[dev]'
+python3 -m pytest tests -q
+```
+
+## Catalog 契约
+
+内置 catalog 使用 `mcp-risk-index.catalog.v1`。每个条目记录 server 身份、package、启动命令、权限、维护事实、review 级别的风险信号、证据和限制。
+
+Review level 是给人工检查的提示：
+
+- `info`：有用上下文
+- `review`：采用前需要检查
+- `high-review`：需要明确 owner 审批
+
+它们不是安全评分。
 
 ## 必要证据
 
