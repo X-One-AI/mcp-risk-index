@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Expand the bundled catalog to twelve evidence-backed real-world MCP server entries.
+- Add high-impact samples covering browser automation, hosted documentation, coding-agent project access, n8n workflow management, database access, and offensive security tooling.
+
 ## 0.2.0
 
 - Expand the bundled catalog to six evidence-backed real-world MCP server entries.
