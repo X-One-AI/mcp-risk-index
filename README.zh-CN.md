@@ -16,7 +16,7 @@
 
 版本化 data catalog：每个条目都需要证据支撑，并提供确定性的本地 CLI。
 
-PyPI 发布后：
+从 PyPI 安装：
 
 ```bash
 python3 -m pip install xone-mcp-risk-index
@@ -26,7 +26,7 @@ mcp-risk-index render --catalog mcp-risk-index.catalog.yml --format markdown --o
 mcp-risk-index render --catalog mcp-risk-index.catalog.yml --format json --output mcp-risk-index.json
 ```
 
-Homebrew tap 更新后：
+从 Homebrew 安装：
 
 ```bash
 brew install x-one-ai/tap/mcp-risk-index
@@ -84,6 +84,8 @@ Strict validation 会要求生产 review 治理字段，例如 `maintenance.sour
 ## 暂缺输入
 
 需要用户或真实世界数据补充的内容记录在 `../x-one-skipped-inputs.md`，不阻塞基础建设。
+
+真实用户反馈应在适用时分类为 false-positive、false-negative、adapter-request、scenario-request 或 catalog-update；portfolio 级处理记录在 X-One portfolio health 文档中。
 
 ## 文档
 
