@@ -16,12 +16,21 @@
 
 版本化 data catalog：每个条目都需要证据支撑，并提供确定性的本地 CLI。
 
+PyPI 发布后：
+
 ```bash
 python3 -m pip install xone-mcp-risk-index
 mcp-risk-index init --output mcp-risk-index.catalog.yml
 mcp-risk-index validate --catalog mcp-risk-index.catalog.yml --strict
 mcp-risk-index render --catalog mcp-risk-index.catalog.yml --format markdown --output mcp-risk-index.md
 mcp-risk-index render --catalog mcp-risk-index.catalog.yml --format json --output mcp-risk-index.json
+```
+
+Homebrew tap 更新后：
+
+```bash
+brew install x-one-ai/tap/mcp-risk-index
+mcp-risk-index --version
 ```
 
 如果在源码仓库中，也可以直接校验内置 catalog：
@@ -80,6 +89,8 @@ Strict validation 会要求生产 review 治理字段，例如 `maintenance.sour
 
 - [产品基础](./docs/product-foundation.md)
 - [Catalog Governance](./docs/catalog-governance.md)
+- [Publishing](./docs/publishing.md)
+- [Homebrew Packaging](./docs/homebrew.md)
 - [Catalog Design](./docs/superpowers/specs/2026-06-13-catalog-design.md)
 - [OPT Overlay](./ops/opt-overlay.md)
 - [生产约束](./ops/constraints/production.md)

@@ -16,12 +16,21 @@ Convert `mcp-audit` rule experience into a reusable public data asset without un
 
 Versioned data catalog with evidence-backed entries and a deterministic local CLI.
 
+After PyPI publication:
+
 ```bash
 python3 -m pip install xone-mcp-risk-index
 mcp-risk-index init --output mcp-risk-index.catalog.yml
 mcp-risk-index validate --catalog mcp-risk-index.catalog.yml --strict
 mcp-risk-index render --catalog mcp-risk-index.catalog.yml --format markdown --output mcp-risk-index.md
 mcp-risk-index render --catalog mcp-risk-index.catalog.yml --format json --output mcp-risk-index.json
+```
+
+After Homebrew tap update:
+
+```bash
+brew install x-one-ai/tap/mcp-risk-index
+mcp-risk-index --version
 ```
 
 From a source checkout, you can also validate the bundled catalog:
@@ -80,6 +89,8 @@ Inputs that require user or real-world data are recorded in `../x-one-skipped-in
 
 - [Product Foundation](./docs/product-foundation.md)
 - [Catalog Governance](./docs/catalog-governance.md)
+- [Publishing](./docs/publishing.md)
+- [Homebrew Packaging](./docs/homebrew.md)
 - [Catalog Design](./docs/superpowers/specs/2026-06-13-catalog-design.md)
 - [OPT Overlay](./ops/opt-overlay.md)
 - [Production Constraints](./ops/constraints/production.md)
