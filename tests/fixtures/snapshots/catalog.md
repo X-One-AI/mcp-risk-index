@@ -124,6 +124,152 @@ Schema: `mcp-risk-index.catalog.v1`
 
 - Sensitive-domain exposure depends on which browser profile, tabs, and targets the client allows.
 
+## Playwright MCP
+
+- ID: `playwright-mcp`
+- Homepage: https://github.com/microsoft/playwright-mcp
+- Package: `npx:@playwright/mcp`
+- Launch: `npx @playwright/mcp@latest`
+- Version pinned: `False`
+
+### Risk Signals
+
+- `sensitive-domain-access` (`high-review`)
+  - Evidence: https://github.com/microsoft/playwright-mcp
+- `network-access` (`high-review`)
+  - Evidence: README documents browser navigation, network request inspection, allowed-origin options, and HTTP transport
+- `filesystem-access` (`review`)
+  - Evidence: README documents user data directories, storage state files, output directories, secrets files, init pages, and init scripts
+- `env-access` (`review`)
+  - Evidence: README lists PLAYWRIGHT_MCP_* environment variables for runtime options
+- `process-exec` (`review`)
+  - Evidence: README documents local browser automation and Docker launch modes
+- `unpinned-launch` (`review`)
+  - Evidence: launch.command uses @latest rather than an exact package version
+
+### Limitations
+
+- Actual exposure depends on browser profile choice, origin policy, enabled capabilities, and whether existing logged-in browser state is connected.
+
+## Context7
+
+- ID: `context7`
+- Homepage: https://github.com/upstash/context7
+- Package: `npx:ctx7`
+- Launch: `npx ctx7 setup`
+- Version pinned: `False`
+
+### Risk Signals
+
+- `network-access` (`review`)
+  - Evidence: README documents the hosted MCP URL https://mcp.context7.com/mcp
+- `env-access` (`review`)
+  - Evidence: README documents passing an API key via the CONTEXT7_API_KEY header
+- `filesystem-access` (`review`)
+  - Evidence: README says ctx7 setup installs the appropriate skill or MCP configuration
+- `process-exec` (`review`)
+  - Evidence: launch.command runs setup through npx
+- `unpinned-launch` (`review`)
+  - Evidence: launch.command uses npx without an exact package version
+
+### Limitations
+
+- Hosted service behavior, API-key handling, and private backend components are not fully represented by public repository files.
+
+## Serena
+
+- ID: `serena`
+- Homepage: https://github.com/oraios/serena
+- Package: `uv:serena-agent`
+- Launch: `uv tool install -p 3.13 serena-agent && serena init`
+- Version pinned: `False`
+
+### Risk Signals
+
+- `filesystem-access` (`high-review`)
+  - Evidence: README describes semantic retrieval and editing capabilities for coding workflows
+- `process-exec` (`high-review`)
+  - Evidence: README documents execute_shell_command for running builds, tests, and linters
+- `unpinned-launch` (`review`)
+  - Evidence: launch.command installs serena-agent without an exact version
+
+### Limitations
+
+- README notes shell/file overlap is often disabled by surrounding agent harnesses; verify enabled tools per client configuration.
+
+## n8n MCP
+
+- ID: `n8n-mcp`
+- Homepage: https://github.com/czlonkowski/n8n-mcp
+- Package: `docker:ghcr.io/czlonkowski/n8n-mcp`
+- Launch: `docker run --rm -i -e N8N_API_URL -e N8N_API_KEY ghcr.io/czlonkowski/n8n-mcp`
+- Version pinned: `False`
+
+### Risk Signals
+
+- `network-access` (`high-review`)
+  - Evidence: README documents n8n API connectivity, hosted dashboard setup, and self-hosted deployment
+- `env-access` (`high-review`)
+  - Evidence: README says n8n management tools require N8N_API_URL and N8N_API_KEY
+- `process-exec` (`review`)
+  - Evidence: README documents Docker and self-hosted deployment options
+- `unpinned-launch` (`review`)
+  - Evidence: launch.command does not pin an image tag or digest
+
+### Limitations
+
+- Risk depends on n8n API permissions, workflow environment, and whether management tools are enabled.
+
+## MCP Toolbox for Databases
+
+- ID: `mcp-toolbox`
+- Homepage: https://github.com/googleapis/mcp-toolbox
+- Package: `npx:@toolbox-sdk/server`
+- Launch: `npx @toolbox-sdk/server --config tools.yaml`
+- Version pinned: `False`
+
+### Risk Signals
+
+- `network-access` (`high-review`)
+  - Evidence: README says the server connects AI agents, IDEs, and applications directly to enterprise databases
+- `env-access` (`high-review`)
+  - Evidence: README says users must set appropriate environment variables to connect prebuilt database tools
+- `filesystem-access` (`review`)
+  - Evidence: README documents tools.yaml as the primary configuration file for sources and tools
+- `process-exec` (`review`)
+  - Evidence: README documents npm, binary, container, Homebrew, and source execution modes
+- `unpinned-launch` (`review`)
+  - Evidence: launch.command uses npx without an exact package version
+
+### Limitations
+
+- Database blast radius depends on configured sources, credentials, network access, and read/write tool definitions.
+
+## HexStrike AI MCP Agents
+
+- ID: `hexstrike-ai`
+- Homepage: https://github.com/0x4m4/hexstrike-ai
+- Package: `python:hexstrike-ai`
+- Launch: `python3 hexstrike_server.py`
+- Version pinned: `False`
+
+### Risk Signals
+
+- `process-exec` (`high-review`)
+  - Evidence: README documents 150+ security tools and an /api/command endpoint to execute arbitrary commands
+- `network-access` (`high-review`)
+  - Evidence: README documents network scanning, web testing, vulnerability assessment, and reconnaissance tools
+- `sensitive-domain-access` (`high-review`)
+  - Evidence: README advises running in isolated environments and says AI agents can execute arbitrary security tools
+- `filesystem-access` (`review`)
+  - Evidence: README documents local installation and security-tool setup
+- `unpinned-launch` (`review`)
+  - Evidence: launch.command starts a local Python entry script without a released package version
+
+### Limitations
+
+- Catalog does not authorize scanning; production use requires explicit target ownership, network controls, and audit logging.
+
 ## Index Limitations
 
 - Review levels are prompts for human review, not security guarantees.

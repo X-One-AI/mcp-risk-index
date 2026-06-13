@@ -24,13 +24,19 @@ def test_load_catalog_validates_bundled_catalog():
         "memory-server",
         "github-mcp-server",
         "chrome-devtools-mcp",
+        "playwright-mcp",
+        "context7",
+        "serena",
+        "n8n-mcp",
+        "mcp-toolbox",
+        "hexstrike-ai",
     ]
 
 
 def test_strict_catalog_validation_requires_review_governance_fields():
     catalog = load_catalog(CATALOG, strict=True)
 
-    assert len(catalog["entries"]) >= 6
+    assert len(catalog["entries"]) >= 12
     assert all(entry["maintenance"]["source_checked_at"] == "2026-06-13" for entry in catalog["entries"])
 
 
