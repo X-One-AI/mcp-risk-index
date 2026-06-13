@@ -33,5 +33,5 @@ Formula/mcp-risk-index.rb
 ## Current Target
 
 ```text
-xone-mcp-risk-index==0.2.0
+xone-mcp-risk-index==0.3.0
 ```

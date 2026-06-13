@@ -6,7 +6,7 @@
 
 ## 状态
 
-`v0.2.0` - 本地 catalog 校验、strict review 检查和渲染 CLI。
+`v0.3.0` - 本地 catalog 校验、strict review 检查和渲染 CLI。
 
 ## 目的
 
