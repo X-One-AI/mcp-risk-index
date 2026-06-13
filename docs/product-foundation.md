@@ -3,7 +3,7 @@
 ## Intake
 
 - Priority: P2
-- Status: v0.2.0 strict catalog CLI and governance
+- Status: v0.3.0 strict catalog CLI and governance
 - Positioning: An open risk index for common MCP servers, permissions, commands, and maintenance signals.
 - Primary route: Product -> Architecture -> Expert/Security -> QA -> Implementation -> Completion readiness
 

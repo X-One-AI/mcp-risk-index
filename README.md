@@ -6,7 +6,7 @@ An open risk index for common MCP servers, permissions, commands, and maintenanc
 
 ## Status
 
-`v0.2.0` - local catalog validation, strict review checks, and rendering CLI.
+`v0.3.0` - local catalog validation, strict review checks, and rendering CLI.
 
 ## Purpose
 
