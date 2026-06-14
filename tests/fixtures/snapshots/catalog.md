@@ -17,6 +17,11 @@ Schema: `mcp-risk-index.catalog.v1`
 - `unpinned-launch` (`review`)
   - Evidence: launch.command uses npx without a pinned package version
 
+### Reviewer Questions
+
+- Which filesystem paths can this server read or write?
+- Can the launch command pin an exact package version, image tag, or digest?
+
 ### Limitations
 
 - Catalog records command and permission signals only; verify current package release and allowed paths before production adoption.
@@ -35,6 +40,11 @@ Schema: `mcp-risk-index.catalog.v1`
   - Evidence: https://github.com/modelcontextprotocol/servers/tree/main/src/fetch
 - `unpinned-launch` (`review`)
   - Evidence: launch.command uses uvx without a pinned package version
+
+### Reviewer Questions
+
+- Which network destinations, token scopes, or client policies limit this access?
+- Can the launch command pin an exact package version, image tag, or digest?
 
 ### Limitations
 
@@ -57,6 +67,12 @@ Schema: `mcp-risk-index.catalog.v1`
 - `unpinned-launch` (`review`)
   - Evidence: launch.command uses uvx without a pinned package version
 
+### Reviewer Questions
+
+- Which filesystem paths can this server read or write?
+- Which local commands, containers, or subprocesses can this server start?
+- Can the launch command pin an exact package version, image tag, or digest?
+
 ### Limitations
 
 - Actual repository scope depends on MCP client configuration and working directory.
@@ -75,6 +91,11 @@ Schema: `mcp-risk-index.catalog.v1`
   - Evidence: https://github.com/modelcontextprotocol/servers/tree/main/src/memory
 - `unpinned-launch` (`review`)
   - Evidence: launch.command uses npx without a pinned package version
+
+### Reviewer Questions
+
+- Which filesystem paths can this server read or write?
+- Can the launch command pin an exact package version, image tag, or digest?
 
 ### Limitations
 
@@ -99,6 +120,13 @@ Schema: `mcp-risk-index.catalog.v1`
 - `unpinned-launch` (`review`)
   - Evidence: launch.command does not pin an image digest or tag
 
+### Reviewer Questions
+
+- Which network destinations, token scopes, or client policies limit this access?
+- Which environment variables or credentials are exposed to this server?
+- Which local commands, containers, or subprocesses can this server start?
+- Can the launch command pin an exact package version, image tag, or digest?
+
 ### Limitations
 
 - Risk depends heavily on GitHub token scopes and organization policy.
@@ -119,6 +147,12 @@ Schema: `mcp-risk-index.catalog.v1`
   - Evidence: launch.command starts local Chrome DevTools integration
 - `unpinned-launch` (`review`)
   - Evidence: launch.command uses @latest rather than an exact package version
+
+### Reviewer Questions
+
+- Could this server access logged-in browser sessions, private data, or sensitive domains?
+- Which local commands, containers, or subprocesses can this server start?
+- Can the launch command pin an exact package version, image tag, or digest?
 
 ### Limitations
 
@@ -147,6 +181,15 @@ Schema: `mcp-risk-index.catalog.v1`
 - `unpinned-launch` (`review`)
   - Evidence: launch.command uses @latest rather than an exact package version
 
+### Reviewer Questions
+
+- Could this server access logged-in browser sessions, private data, or sensitive domains?
+- Which network destinations, token scopes, or client policies limit this access?
+- Which filesystem paths can this server read or write?
+- Which environment variables or credentials are exposed to this server?
+- Which local commands, containers, or subprocesses can this server start?
+- Can the launch command pin an exact package version, image tag, or digest?
+
 ### Limitations
 
 - Actual exposure depends on browser profile choice, origin policy, enabled capabilities, and whether existing logged-in browser state is connected.
@@ -172,6 +215,14 @@ Schema: `mcp-risk-index.catalog.v1`
 - `unpinned-launch` (`review`)
   - Evidence: launch.command uses npx without an exact package version
 
+### Reviewer Questions
+
+- Which network destinations, token scopes, or client policies limit this access?
+- Which environment variables or credentials are exposed to this server?
+- Which filesystem paths can this server read or write?
+- Which local commands, containers, or subprocesses can this server start?
+- Can the launch command pin an exact package version, image tag, or digest?
+
 ### Limitations
 
 - Hosted service behavior, API-key handling, and private backend components are not fully represented by public repository files.
@@ -192,6 +243,12 @@ Schema: `mcp-risk-index.catalog.v1`
   - Evidence: README documents execute_shell_command for running builds, tests, and linters
 - `unpinned-launch` (`review`)
   - Evidence: launch.command installs serena-agent without an exact version
+
+### Reviewer Questions
+
+- Which filesystem paths can this server read or write?
+- Which local commands, containers, or subprocesses can this server start?
+- Can the launch command pin an exact package version, image tag, or digest?
 
 ### Limitations
 
@@ -215,6 +272,13 @@ Schema: `mcp-risk-index.catalog.v1`
   - Evidence: README documents Docker and self-hosted deployment options
 - `unpinned-launch` (`review`)
   - Evidence: launch.command does not pin an image tag or digest
+
+### Reviewer Questions
+
+- Which network destinations, token scopes, or client policies limit this access?
+- Which environment variables or credentials are exposed to this server?
+- Which local commands, containers, or subprocesses can this server start?
+- Can the launch command pin an exact package version, image tag, or digest?
 
 ### Limitations
 
@@ -241,6 +305,14 @@ Schema: `mcp-risk-index.catalog.v1`
 - `unpinned-launch` (`review`)
   - Evidence: launch.command uses npx without an exact package version
 
+### Reviewer Questions
+
+- Which network destinations, token scopes, or client policies limit this access?
+- Which environment variables or credentials are exposed to this server?
+- Which filesystem paths can this server read or write?
+- Which local commands, containers, or subprocesses can this server start?
+- Can the launch command pin an exact package version, image tag, or digest?
+
 ### Limitations
 
 - Database blast radius depends on configured sources, credentials, network access, and read/write tool definitions.
@@ -265,6 +337,14 @@ Schema: `mcp-risk-index.catalog.v1`
   - Evidence: README documents local installation and security-tool setup
 - `unpinned-launch` (`review`)
   - Evidence: launch.command starts a local Python entry script without a released package version
+
+### Reviewer Questions
+
+- Which local commands, containers, or subprocesses can this server start?
+- Which network destinations, token scopes, or client policies limit this access?
+- Could this server access logged-in browser sessions, private data, or sensitive domains?
+- Which filesystem paths can this server read or write?
+- Can the launch command pin an exact package version, image tag, or digest?
 
 ### Limitations
 

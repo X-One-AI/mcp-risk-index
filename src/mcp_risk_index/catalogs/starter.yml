@@ -17,7 +17,7 @@ entries:
       process: []
     maintenance:
       repository: https://github.com/modelcontextprotocol/servers
-      source_checked_at: "2026-06-13"
+      source_checked_at: "2026-06-14"
       release_signal: "replace with current release or activity evidence before use"
     risk_signals:
       - id: filesystem-access

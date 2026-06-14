@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.1
+
+- Add generated reviewer questions to Markdown and JSON catalog renders so risk signals translate into concrete review actions.
+- Refresh bundled public sample metadata on 2026-06-14 using public GitHub repository metadata.
+- Correct publishing documentation to reflect the existing PyPI and TestPyPI package status.
+
 ## 0.3.0
 
 - Expand the bundled catalog to twelve evidence-backed real-world MCP server entries.
