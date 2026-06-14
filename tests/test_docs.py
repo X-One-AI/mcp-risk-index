@@ -47,3 +47,14 @@ def test_mcp_audit_adoption_review_workflow_is_actionable():
     assert "Run mcp-audit first" in workflow
     assert "Map catalog signals to audit findings" in workflow
     assert "Product gate" in workflow
+
+
+def test_risk_context_note_document_sets_review_boundary():
+    workflow = Path("docs/risk-context-note.md").read_text(encoding="utf-8")
+
+    assert "review context, not an allow/deny decision" in workflow
+    assert "signal" in workflow
+    assert "evidence" in workflow
+    assert "reviewer question" in workflow
+    assert "limitations" in workflow
+    assert "must not be used as a merge gate by itself" in workflow
