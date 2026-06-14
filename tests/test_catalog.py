@@ -37,7 +37,7 @@ def test_strict_catalog_validation_requires_review_governance_fields():
     catalog = load_catalog(CATALOG, strict=True)
 
     assert len(catalog["entries"]) >= 12
-    assert all(entry["maintenance"]["source_checked_at"] == "2026-06-13" for entry in catalog["entries"])
+    assert all(entry["maintenance"]["source_checked_at"] == "2026-06-14" for entry in catalog["entries"])
 
 
 @pytest.mark.parametrize(
@@ -64,6 +64,15 @@ def test_render_json_outputs_machine_readable_catalog():
 
     assert data["schema_version"] == "mcp-risk-index.catalog.v1"
     assert data["entries"][0]["risk_signals"][0]["id"] == "filesystem-access"
+    assert "Which filesystem paths can this server read or write?" in data["entries"][0]["review_questions"]
+
+
+def test_render_markdown_outputs_reviewer_questions():
+    markdown = render_markdown(load_catalog(CATALOG))
+
+    assert "### Reviewer Questions" in markdown
+    assert "- Which filesystem paths can this server read or write?" in markdown
+    assert "- Which network destinations, token scopes, or client policies limit this access?" in markdown
 
 
 def test_cli_validate_and_render(tmp_path, capsys):
@@ -85,6 +94,7 @@ def test_cli_validate_and_render(tmp_path, capsys):
     assert json_exit == 0
     assert "# MCP Risk Index" in markdown.read_text(encoding="utf-8")
     assert json.loads(json_output.read_text(encoding="utf-8"))["entries"]
+    assert "review_questions" in render_json(load_catalog(starter))
 
 
 def test_package_module_entrypoint_outputs_version():
@@ -96,4 +106,4 @@ def test_package_module_entrypoint_outputs_version():
         stdout=subprocess.PIPE,
     )
 
-    assert result.stdout.strip() == "mcp-risk-index 0.3.0"
+    assert result.stdout.strip() == "mcp-risk-index 0.3.1"

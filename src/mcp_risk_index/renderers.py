@@ -4,8 +4,27 @@ import json
 from typing import Any
 
 
+REVIEW_QUESTIONS_BY_SIGNAL = {
+    "filesystem-access": "Which filesystem paths can this server read or write?",
+    "network-access": "Which network destinations, token scopes, or client policies limit this access?",
+    "env-access": "Which environment variables or credentials are exposed to this server?",
+    "process-exec": "Which local commands, containers, or subprocesses can this server start?",
+    "unpinned-launch": "Can the launch command pin an exact package version, image tag, or digest?",
+    "low-maintenance-signal": "What current maintenance or release evidence should be checked before adoption?",
+    "sensitive-domain-access": "Could this server access logged-in browser sessions, private data, or sensitive domains?",
+}
+
+
 def render_json(catalog: dict[str, Any]) -> str:
-    return json.dumps(catalog, ensure_ascii=False, indent=2) + "\n"
+    rendered = dict(catalog)
+    rendered["entries"] = [
+        {
+            **entry,
+            "review_questions": build_review_questions(entry),
+        }
+        for entry in catalog["entries"]
+    ]
+    return json.dumps(rendered, ensure_ascii=False, indent=2) + "\n"
 
 
 def render_markdown(catalog: dict[str, Any]) -> str:
@@ -51,8 +70,21 @@ def _render_entry(entry: dict[str, Any]) -> list[str]:
         for evidence in signal["evidence"]:
             lines.append(f"  - Evidence: {evidence}")
 
+    lines.extend(["", "### Reviewer Questions", ""])
+    for question in build_review_questions(entry):
+        lines.append(f"- {question}")
+
     lines.extend(["", "### Limitations", ""])
     for limitation in entry["limitations"]:
         lines.append(f"- {limitation}")
     lines.append("")
     return lines
+
+
+def build_review_questions(entry: dict[str, Any]) -> list[str]:
+    questions: list[str] = []
+    for signal in entry["risk_signals"]:
+        question = REVIEW_QUESTIONS_BY_SIGNAL.get(signal["id"])
+        if question and question not in questions:
+            questions.append(question)
+    return questions

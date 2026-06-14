@@ -6,7 +6,7 @@
 
 ## 状态
 
-`v0.3.0` - 本地 catalog 校验、strict review 检查和渲染 CLI。
+`v0.3.1` - 支持 reviewer questions 的证据化 catalog 渲染、strict review 检查和已刷新的公开样本元数据。
 
 ## 目的
 
@@ -50,7 +50,7 @@ python3 -m pytest tests -q
 
 ## Catalog 契约
 
-内置 catalog 使用 `mcp-risk-index.catalog.v1`。每个条目记录 server 身份、package、启动命令、权限、维护事实、review 级别的风险信号、证据和限制。
+内置 catalog 使用 `mcp-risk-index.catalog.v1`。每个条目记录 server 身份、package、启动命令、权限、维护事实、review 级别的风险信号、证据和限制。Markdown 和 JSON 渲染结果还会根据证据化信号生成 reviewer questions，帮助 reviewer 把风险信号转成下一步检查动作。
 
 Review level 是给人工检查的提示：
 

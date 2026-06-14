@@ -6,7 +6,7 @@ An open risk index for common MCP servers, permissions, commands, and maintenanc
 
 ## Status
 
-`v0.3.0` - local catalog validation, strict review checks, and rendering CLI.
+`v0.3.1` - evidence-backed catalog rendering with reviewer questions, strict review checks, and refreshed public sample metadata.
 
 ## Purpose
 
@@ -50,7 +50,7 @@ python3 -m pytest tests -q
 
 ## Catalog Contract
 
-The bundled catalog uses `mcp-risk-index.catalog.v1`. Each entry records identity, package, launch command, permissions, maintenance facts, review-level risk signals, evidence, and limitations.
+The bundled catalog uses `mcp-risk-index.catalog.v1`. Each entry records identity, package, launch command, permissions, maintenance facts, review-level risk signals, evidence, and limitations. Rendered Markdown and JSON also include reviewer questions derived from the evidence-backed signals.
 
 Review levels are prompts for human inspection:
 

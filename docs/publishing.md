@@ -16,10 +16,10 @@ mcp-risk-index
 
 ## Current Index Status
 
-As of 2026-06-13, public API checks show:
+As of 2026-06-14, public API checks show:
 
-- PyPI: `xone-mcp-risk-index` is not published yet.
-- TestPyPI: `xone-mcp-risk-index` is not published yet.
+- PyPI: `xone-mcp-risk-index 0.3.0` is published with 2 artifacts.
+- TestPyPI: `xone-mcp-risk-index 0.3.0` is published with 2 artifacts.
 
 ## GitHub Environments
 
@@ -43,7 +43,7 @@ Environment: testpypi or pypi
 ## Publish Order
 
 1. Merge and verify a green CI run on `main`.
-2. Confirm the release tag exists, for example `v0.3.0`.
+2. Confirm the release tag exists, for example `v0.3.1`.
 3. Run `Publish Python Package` with `repository = testpypi`.
 4. Verify a clean TestPyPI install.
 5. Run `Publish Python Package` with `repository = pypi` from a release tag after approval.
@@ -71,6 +71,6 @@ python -m venv /tmp/mcp-risk-index-pypi
 ## GitHub Release Install Path
 
 ```bash
-python3 -m pip install https://github.com/X-One-AI/mcp-risk-index/releases/download/v0.3.0/xone_mcp_risk_index-0.3.0-py3-none-any.whl
+python3 -m pip install https://github.com/X-One-AI/mcp-risk-index/releases/download/v0.3.1/xone_mcp_risk_index-0.3.1-py3-none-any.whl
 mcp-risk-index --version
 ```
