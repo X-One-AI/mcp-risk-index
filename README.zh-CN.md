@@ -91,6 +91,7 @@ Strict validation 会要求生产 review 治理字段，例如 `maintenance.sour
 
 - [产品基础](./docs/product-foundation.md)
 - [Catalog Governance](./docs/catalog-governance.md)
+- [MCP Audit Adoption Review](./docs/mcp-audit-adoption-review.md)
 - [Publishing](./docs/publishing.md)
 - [Homebrew Packaging](./docs/homebrew.md)
 - [Catalog Design](./docs/superpowers/specs/2026-06-13-catalog-design.md)

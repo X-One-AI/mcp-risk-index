@@ -37,3 +37,13 @@ def test_docs_and_package_metadata_stay_aligned():
     assert "## 0.1.0" in changelog
     assert "source_checked_at" in governance
     assert "No safe/unsafe labels" in contributing
+
+
+def test_mcp_audit_adoption_review_workflow_is_actionable():
+    workflow = Path("docs/mcp-audit-adoption-review.md").read_text(encoding="utf-8")
+
+    assert "mcp-audit adoption review path" in workflow
+    assert "Support asset, not a scoring product" in workflow
+    assert "Run mcp-audit first" in workflow
+    assert "Map catalog signals to audit findings" in workflow
+    assert "Product gate" in workflow
