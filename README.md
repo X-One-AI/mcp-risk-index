@@ -92,6 +92,7 @@ Real-user feedback should be classified as false-positive, false-negative, adapt
 - [Product Foundation](./docs/product-foundation.md)
 - [Catalog Governance](./docs/catalog-governance.md)
 - [MCP Audit Adoption Review](./docs/mcp-audit-adoption-review.md)
+- [Risk Context Note](./docs/risk-context-note.md)
 - [Publishing](./docs/publishing.md)
 - [Homebrew Packaging](./docs/homebrew.md)
 - [Catalog Design](./docs/superpowers/specs/2026-06-13-catalog-design.md)
